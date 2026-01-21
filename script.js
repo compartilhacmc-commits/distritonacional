@@ -176,6 +176,7 @@ async function loadData() {
   try {
     console.log('Carregando dados das duas abas...');
 
+    // ✅ AQUI: devolvemos também o "tipo" (PENDENTE/RESOLVIDO)
     const promises = SHEETS.map(sheet =>
       fetch(sheet.url, { cache: 'no-store' })
         .then(response => {
@@ -191,7 +192,8 @@ async function loadData() {
             throw new Error(`Aba "${sheet.name}" retornou HTML (provável falta de permissão).`);
           }
 
-          return { name: sheet.name, csv: csvText };
+          // ✅ MANTÉM name, mas adiciona tipo
+          return { name: sheet.name, tipo: sheet.tipo, csv: csvText };
         })
     );
 
@@ -207,7 +209,10 @@ async function loadData() {
       const sheetData = rows.slice(1)
         .filter(row => row.length > 1 && (row[0] || '').trim() !== '')
         .map(row => {
-          const obj = { _origem: result.name };
+          // ✅ CORREÇÃO DO BUG:
+          // antes: { _origem: result.name }  -> ficava sempre "NACIONAL"
+          // agora: { _origem: result.tipo } -> "PENDENTE" ou "RESOLVIDO"
+          const obj = { _origem: result.tipo };
           headers.forEach((header, index) => {
             if (!header) return;
             obj[header] = (row[index] || '').trim();
@@ -1258,5 +1263,3 @@ function downloadExcel() {
   const hoje = new Date().toISOString().split('T')[0];
   XLSX.writeFile(wb, `Dados_Nacional_${hoje}.xlsx`);
 }
-
-
