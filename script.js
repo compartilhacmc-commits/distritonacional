@@ -9,7 +9,7 @@ function gvizCsvUrl(sheetId, gid) {
 // ===================================
 // CONFIGURAÇÃO DA PLANILHA (DUAS ABAS)
 // ===================================
-// ✅ PLANILHA "VARGEM DAS FLORES"
+// ✅ PLANILHA "NACIONAL"
 const SHEET_ID = '1lMGO9Hh_qL9OKI270fPL7lxadr-BZN9x_ZtmQeX6OcA';
 
 const SHEETS = [
@@ -42,7 +42,7 @@ let chartPizzaStatus = null;
 let chartPendenciasPrestador = null;
 let chartPendenciasMes = null;
 
-// ✅ NOVO: gráfico de evolução temporal
+// ✅ gráfico de evolução temporal
 let chartEvolucaoTemporal = null;
 
 // ===================================
@@ -564,7 +564,7 @@ function updateCharts() {
   // Pizza
   createPieChart('chartPizzaStatus', statusLabels, statusValues);
 
-  // ✅ NOVO: Evolução Temporal de Pendências por Mês
+  // ✅ Evolução Temporal de Pendências por Mês
   createEvolucaoTemporalChart('chartEvolucaoTemporal');
 
   // Pendências por Prestador
@@ -1256,6 +1256,7 @@ function downloadExcel() {
   ];
 
   const hoje = new Date().toISOString().split('T')[0];
-  XLSX.writeFile(wb, `Dados_Vargem das Flores_${hoje}.xlsx`);
+  XLSX.writeFile(wb, `Dados_Nacional_${hoje}.xlsx`);
 }
+
 
