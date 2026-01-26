@@ -14,13 +14,13 @@ const SHEET_ID = '1lMGO9Hh_qL9OKI270fPL7lxadr-BZN9x_ZtmQeX6OcA';
 
 const SHEETS = [
   {
-    name: 'NACIONAL',
+    name: 'PENDÊNCIAS NACIONAL',
     url: gvizCsvUrl(SHEET_ID, '278071504'),
     distrito: 'NACIONAL',
     tipo: 'PENDENTE'
   },
   {
-    name: 'NACIONAL',
+    name: 'RESOLVIDOS NACIONAL',
     url: gvizCsvUrl(SHEET_ID, '150768142'),
     distrito: 'NACIONAL',
     tipo: 'RESOLVIDO'
@@ -1319,5 +1319,6 @@ function downloadExcel() {
   const hoje = new Date().toISOString().split('T')[0];
   XLSX.writeFile(wb, `Dados_Eldorado_${hoje}.xlsx`);
 }
+
 
 
