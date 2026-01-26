@@ -1320,3 +1320,4 @@ function downloadExcel() {
   XLSX.writeFile(wb, `Dados_Eldorado_${hoje}.xlsx`);
 }
 
+
